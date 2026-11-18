@@ -39,6 +39,10 @@ jobs:
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
+        with:
+          # 新版 SDK 仓库里已经没有 'tools' 包了，action 默认装它会直接失败。
+          # 显式指定需要的两个包，并把许可一并接受。
+          packages: 'platforms;android-36 build-tools;36.0.0' 
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4

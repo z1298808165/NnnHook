@@ -37,19 +37,34 @@ jobs:
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
+        with:
+          # 新版 SDK 仓库里已经没有 'tools' 包了，action 默认装它会直接失败。
+          # 显式指定需要的两个包，并把许可一并接受。
+          packages: 'platforms;android-36 build-tools;36.0.0' 
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      # 有签名密钥就用，没有就退回 debug 签名（产物照样能装）
+      # 有签名密钥就用，没有就退回 debug 签名（产物照样能装）。
+      # 注意：secrets 不能直接写在 if 条件里，只能过 env 再在 shell 里判断。
       - name: Restore keystore
-        if: ${{ secrets.KEYSTORE_BASE64 != '' }}
+        env:
+          KS_B64: ${{ secrets.KEYSTORE_BASE64 }}
+          KS_PW: ${{ secrets.KEYSTORE_PASSWORD }}
+          KS_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KS_KEY_PW: ${{ secrets.KEY_PASSWORD }}
         run: |
-          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > "$RUNNER_TEMP/release.jks"
-          echo "NNNHOOK_KEYSTORE=$RUNNER_TEMP/release.jks" >> "$GITHUB_ENV"
-          echo "NNNHOOK_KEYSTORE_PASSWORD=${{ secrets.KEYSTORE_PASSWORD }}" >> "$GITHUB_ENV"
-          echo "NNNHOOK_KEY_ALIAS=${{ secrets.KEY_ALIAS }}" >> "$GITHUB_ENV"
-          echo "NNNHOOK_KEY_PASSWORD=${{ secrets.KEY_PASSWORD }}" >> "$GITHUB_ENV"
+          set -e
+          if [ -n "$KS_B64" ]; then
+            echo "$KS_B64" | base64 -d > "$RUNNER_TEMP/release.jks"
+            echo "NNNHOOK_KEYSTORE=$RUNNER_TEMP/release.jks" >> "$GITHUB_ENV"
+            echo "NNNHOOK_KEYSTORE_PASSWORD=$KS_PW" >> "$GITHUB_ENV"
+            echo "NNNHOOK_KEY_ALIAS=$KS_ALIAS" >> "$GITHUB_ENV"
+            echo "NNNHOOK_KEY_PASSWORD=$KS_KEY_PW" >> "$GITHUB_ENV"
+            echo "签名密钥已载入"
+          else
+            echo "未配置签名密钥，将使用 debug 签名"
+          fi
 
       - name: Build release APK
         run: ./gradlew :app:assembleRelease --no-daemon --stacktrace
