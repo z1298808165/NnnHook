@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+        现代 Xposed API（101+）不再读 AndroidManifest 里的 xposed* meta-data：
+        模块名取 android:label，描述取 android:description，
+        入口取 META-INF/xposed/java_init.list，作用域取 scope.list，
+        版本与静态作用域开关取 module.prop。
+    -->
+    <application
+        android:allowBackup="false"
+        android:description="@string/module_desc"
+        android:hasCode="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true">
+
+        <!-- 模块无功能界面，只留一个信息页用于查看版本与日志入口 -->
+        <activity
+            android:name="io.nnnhook.ui.InfoActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.DeviceDefault">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

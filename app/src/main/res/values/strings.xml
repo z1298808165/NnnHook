@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NnnHook</string>
+    <string name="module_desc">Nnngram 功能适配 · DexKit 自动识别，抗混淆换版</string>
+</resources>
