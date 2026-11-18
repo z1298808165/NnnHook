@@ -1,12 +1,17 @@
-# NnnHook
+<h1 align="center">NnnHook</h1>
 
-![Release](https://img.shields.io/github/v/release/z1298808165/NnnHook?label=release&color=blue)
-![CI](https://img.shields.io/github/actions/workflow/status/z1298808165/NnnHook/ci.yml?label=CI)
-![Android](https://img.shields.io/badge/Android-10%2B-3ddc84)
-![LSPosed](https://img.shields.io/badge/LSPosed-API%20102-6f42c1)
-![License](https://img.shields.io/badge/license-MIT-lightgrey)
+<p align="center">
+  <img src="https://img.shields.io/github/v/release/z1298808165/NnnHook?label=release&color=blue" alt="Release" />
+  <img src="https://img.shields.io/github/actions/workflow/status/z1298808165/NnnHook/ci.yml?label=CI" alt="CI" />
+  <img src="https://img.shields.io/badge/Android-10%2B-3ddc84" alt="Android" />
+  <img src="https://img.shields.io/badge/LSPosed-API%20102-6f42c1" alt="LSPosed" />
+  <img src="https://img.shields.io/badge/license-MIT-lightgrey" alt="License" />
+</p>
 
-**解锁 Nnngram 的本地会员、置顶与文件夹上限、隐私开关 —— 换了版本也能自己适配。**
+<p align="center">
+  <b>解锁本地会员、置顶与文件夹上限、隐私开关</b><br />
+  <sub>基于 DexKit 的锚点自推导 —— 理论上全版本通杀，换版本不需要改代码</sub>
+</p>
 
 * * *
 
@@ -15,8 +20,9 @@ NnnHook 是一个面向 **Nnngram**（`xyz.nextalone.nnngram`，Telegram 分支�
 它做四件事：**解开本地会员权益**、**抬高置顶与文件夹上限**、**关掉已读 / 在线 / 截图 / 输入中
 这些状态上报**、**隐藏频道里的赞助消息**。全部在客户端完成，不发额外请求、不改协议。
 
-目标每次重新混淆发版，模块会自己重新定位落点 —— 落点由 **DexKit** 从「TL 类名 + 字段名 +
-TL 生成方法名」推导，结果缓存进目标私有目录，版本不变就不重算。
+**适配不靠写死名字，靠推导。** 落点由 **DexKit** 在运行时从「TL 类名 + 字段名 + TL 生成方法名」
+重新推导，结果缓存进目标私有目录 —— 只要目标还遵循 Telegram 协议，锚点就成立，
+理论上**全版本通杀**，不需要为新版本单独改代码。
 
 > **本仓库是个人维护的适配层。** 目标是闭源混淆包，没有可用的上游源码可比对，
 > 落点全部靠静态结构 + 真机日志反推得出。因此每次目标发版后，
