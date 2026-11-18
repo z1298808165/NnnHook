@@ -1,7 +1,7 @@
 # NnnHook
 
-![Release](https://img.shields.io/github/v/release/OWNER/REPO?label=release&color=blue)
-![CI](https://img.shields.io/github/actions/workflow/status/OWNER/REPO/ci.yml?label=CI)
+![Release](https://img.shields.io/github/v/release/z1298808165/NnnHook?label=release&color=blue)
+![CI](https://img.shields.io/github/actions/workflow/status/z1298808165/NnnHook/ci.yml?label=CI)
 ![Android](https://img.shields.io/badge/Android-10%2B-3ddc84)
 ![LSPosed](https://img.shields.io/badge/LSPosed-API%20102-6f42c1)
 ![License](https://img.shields.io/badge/license-MIT-lightgrey)
