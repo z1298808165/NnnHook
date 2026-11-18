@@ -6,13 +6,17 @@
 ![LSPosed](https://img.shields.io/badge/LSPosed-API%20102-6f42c1)
 ![License](https://img.shields.io/badge/license-MIT-lightgrey)
 
-**给 Nnngram 加一层运行时适配层 —— 目标重新混淆发版，模块自己会重新找落点。**
+**解锁 Nnngram 的本地会员、置顶与文件夹上限、隐私开关 —— 换了版本也能自己适配。**
 
 * * *
 
-NnnHook 是一个 LSPosed 模块（API 102），面向 **Nnngram**（`xyz.nextalone.nnngram`，Telegram 分支）。
-它不修改目标 APK，也不依赖任何写死的混淆名：所有 hook 落点在运行时由 **DexKit** 从
-「TL 类名 + 字段名 + TL 生成方法名」重新推导，推导结果缓存进目标私有目录，版本不变就不重算。
+NnnHook 是一个面向 **Nnngram**（`xyz.nextalone.nnngram`，Telegram 分支）的 LSPosed 模块（API 102）。
+
+它做四件事：**解开本地会员权益**、**抬高置顶与文件夹上限**、**关掉已读 / 在线 / 截图 / 输入中
+这些状态上报**、**隐藏频道里的赞助消息**。全部在客户端完成，不发额外请求、不改协议。
+
+目标每次重新混淆发版，模块会自己重新定位落点 —— 落点由 **DexKit** 从「TL 类名 + 字段名 +
+TL 生成方法名」推导，结果缓存进目标私有目录，版本不变就不重算。
 
 > **本仓库是个人维护的适配层。** 目标是闭源混淆包，没有可用的上游源码可比对，
 > 落点全部靠静态结构 + 真机日志反推得出。因此每次目标发版后，
